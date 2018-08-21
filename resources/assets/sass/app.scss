@@ -9,7 +9,7 @@ $navbar-color: #1C2833;
 
 
 body {
-  padding-top: 120px;
+  padding-top: 80px;
   background-color: #339999
 }
 
@@ -153,4 +153,20 @@ section.user_info {
   margin-right: 10px;
   max-width: 50px;
   border-radius: 50%;
+}
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
+}
+
+.panel {
+  margin-top: 50px;
 }
