@@ -32,7 +32,10 @@ class UsersController extends Controller
     		'password'=> bcrypt($request->password)
     	]);
 
+    	Auth::login($user);
+
     	session()->flash('success','欢迎进驻拉莱耶。请您注意保持清醒。');
     	return redirect()->route('users.show',[$user]); //COC
     }
+
 }

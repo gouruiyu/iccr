@@ -27,3 +27,6 @@ Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit');
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy');
 */
+Route::get('/login', 'SessionsController@create')->name('login'); //显示登录界面
+Route::post('/login', 'SessionsController@store')->name('login'); //创建新会话(登录)
+Route::delete('/logout', 'SessionsController@destroy')->name('logout'); //销毁会话（退出登录）
