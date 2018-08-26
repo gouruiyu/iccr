@@ -29,6 +29,15 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
+    /* BOOT方法在User初始化之后进行加载*/
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token = str_random(30);
+        });
+    }
 
     public function gravatar($size = '100')
     {
@@ -40,5 +49,7 @@ class User extends Authenticatable
         d=robohash: robot with different color, faces, etc;
         */
     }
+
+
     
 }

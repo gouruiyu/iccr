@@ -30,3 +30,5 @@ Route::delete('/users/{user}', 'UsersController@destroy')->name('users.destroy')
 Route::get('/login', 'SessionsController@create')->name('login'); //显示登录界面
 Route::post('/login', 'SessionsController@store')->name('login'); //创建新会话(登录)
 Route::delete('/logout', 'SessionsController@destroy')->name('logout'); //销毁会话（退出登录）
+
+Route::get('/signup/confirm/{token})', 'UsersController@confirmEmail')->name('confirm_email');

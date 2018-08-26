@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
 use Auth;
+use Mail;
 
 class UsersController extends Controller
 {
@@ -14,7 +15,7 @@ class UsersController extends Controller
 	{
 		/* 不允许游客访问个人资料编辑页面  */
 		$this->middleware('auth', [
-			'except' => ['create', 'show', 'store','index']
+			'except' => ['create', 'show', 'store','index', 'confirmEmail']
 		]);
 
 		/* 仅允许游客访问注册页面 */
@@ -47,10 +48,12 @@ class UsersController extends Controller
     		'password'=> bcrypt($request->password)
     	]);
 
-    	Auth::login($user);
-
-    	session()->flash('success','欢迎进驻拉莱耶。请您注意保持清醒。');
-    	return redirect()->route('users.show',[$user]); //COC
+    	//Auth::login($user);
+    	$this->sendEmailConfirmationTo($user);
+    	//session()->flash('success','欢迎进驻拉莱耶。请您注意保持清醒。');
+    	session()->flash('success', '验证邮件已发到你的注册邮箱上，请注意查收。');
+    	//return redirect()->route('users.show',[$user]); //COC
+    	return redirect('/');
     }
 
     public function edit(User $user)
@@ -95,4 +98,31 @@ class UsersController extends Controller
     	return back();
     }
 
+
+    protected function sendEmailConfirmationTo($user) 
+    {
+    	$view = 'emails.confirm';
+    	$data = compact('user');
+    	$from = 'rlyeh.iccrgame@gmail.com';
+    	$name = 'iccr';
+    	$to = $user->email;
+    	$subject = "感谢来到拉莱耶！请确认你的邮箱。";
+
+    	Mail::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
+    		$message->from($from, $name)->to($to)->subject($subject);
+    	});
+    }
+
+    public function confirmEmail($token)
+    {
+    	$user = User::where('activation_token',$token)->firstOrfail();
+
+    	$user->activated = true;
+    	$user->activation_token = null;
+    	$user->save();
+
+    	Auth::login($user);
+    	session()->flash('success', '恭喜你，激活成功！');
+    	return redirect()->route('users.show', [$user]);
+    }
 }
