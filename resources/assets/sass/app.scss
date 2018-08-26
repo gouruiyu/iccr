@@ -177,3 +177,40 @@ input {
 .panel {
   margin-top: 50px;
 }
+
+/* Users edit */
+
+.gravatar_edit {
+  margin: 15px auto;
+  text-align: center;
+  .gravatar {
+    float: none;
+    max-width: 100px;
+  }
+}
+
+/* Users index */
+.users {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #777;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    a {
+      color: #17202A;
+    }
+    a:hover {
+      color: #FDFEFE;
+    }
+  }
+}
+
+
+
+.delete-btn {
+  float: right;
+  position: relative;
+  right: 0;
+}
