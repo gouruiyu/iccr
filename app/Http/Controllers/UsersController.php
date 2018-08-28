@@ -95,6 +95,7 @@ class UsersController extends Controller
     {
     	$this->authorize('destroy', $user);
     	$user->delete();
+        $user->statuses()->delete();
     	session()->flash('success','成功删除该用户！');
     	return back();
     }
@@ -108,8 +109,8 @@ class UsersController extends Controller
     	$to = $user->email;
     	$subject = "感谢来到拉莱耶！请确认你的邮箱。";
 
-    	Mail::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
-    		$message->from($from, $name)->to($to)->subject($subject);
+    	Mail::send($view, $data, function ($message) use ($to, $subject) {
+    		$message->to($to)->subject($subject);
     	});
     }
 

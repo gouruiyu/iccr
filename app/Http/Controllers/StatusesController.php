@@ -23,6 +23,7 @@ class StatusesController extends Controller
     	Auth::user()->statuses()->create([
     		'content' => $request['content']
     	]);
+    	session()->flash('success','您已成功广播！');
     	return redirect()->back();
     }
 
