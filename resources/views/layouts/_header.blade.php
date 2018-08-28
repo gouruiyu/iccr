@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <div class="col-md-offset-1 col-md-10">
-      <a href="/" id="logo">ICCr</a>
+      <a href="/" id="logo">R'lyeh</a>
       <nav>
         <ul class="nav navbar-nav navbar-right">
           @if (Auth::check())
