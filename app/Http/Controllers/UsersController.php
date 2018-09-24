@@ -52,7 +52,7 @@ class UsersController extends Controller
     	//Auth::login($user);
     	$this->sendEmailConfirmationTo($user);
     	//session()->flash('success','欢迎进驻拉莱耶。请您注意保持清醒。');
-    	session()->flash('success', '验证邮件已发到你的注册邮箱上，请注意查收。');
+    	session()->flash('success', '欢迎进驻拉莱耶。请您注意保持清醒。');
     	//return redirect()->route('users.show',[$user]); //COC
     	return redirect('/');
     }
